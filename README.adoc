@@ -12,8 +12,11 @@ Run `networkUsageProc.py` and network usage monitoring is started.
 Data is stored in json format.
 [source,json]
 ----
-[{'name': 'enp3s0', 'bypsRx': 0, 'bypsTx': 0}, {'name': 'wlp4s0', 'bypsRx
-': 60, 'bypsTx': 0}, {'name': 'total', 'bypsRx': 60, 'bypsTx': 0}]
+[
+  {"name": "enp3s0", "bypsRx": 0, "bypsTx": 0},
+  {"name": "wlp4s0", "bypsRx": 51152, "bypsTx": 3183824},
+  {"name": "total", "bypsRx": 51152, "bypsTx": 3183824}
+]
 ----
 
 Interfaces monitored are all that match this parameters:

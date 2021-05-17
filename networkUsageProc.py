@@ -1,4 +1,5 @@
 import os
+import json
 from time import sleep
 
 desiredInterfaces = [
@@ -87,7 +88,7 @@ def storeToFile(interfaces, jsonFile):
     })
 
     with open(jsonFile, "w") as file:
-        file.write(str(jsonFileData))
+        file.write(json.dumps(jsonFileData))
 
 
 def monitorNetworkUsage(selectedInterfaces):
