@@ -10,6 +10,10 @@ desiredInterfaces = [
 
 cpuTemperatureFile = os.path.dirname(os.path.abspath(__file__)) + "/logs/networkUsage.json"
 
+filesToSetup = [
+    cpuTemperatureFile,
+]
+
 cmd_getTxBytes = "cat /sys/class/net/%s/statistics/tx_bytes"
 cmd_getRxBytes = "cat /sys/class/net/%s/statistics/rx_bytes"
 
@@ -18,6 +22,13 @@ cmd_getAvailableInterfaces = "cat /proc/net/dev | grep : | awk '{printf(\"%s\\n\
 
 def sprintf(format, *args):
     return (format % args)
+
+
+def setupFiles(files):
+    for file in files:
+        directory = os.path.dirname(file)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
 
 
 def getBytes(interface):
@@ -59,7 +70,10 @@ def setupInterfaces(interfaces):
 
 
 def printUsage(interface):
-    print(sprintf("%s - Rx: %d kB, Tx: %d kB", interface["name"], interface["bypsRx"]/1000, interface["bypsTx"]/1000))
+    print(sprintf("%s - Rx: %d kB, Tx: %d kB",
+                  interface["name"],
+                  interface["bypsRx"]/1000,
+                  interface["bypsTx"]/1000))
 
 
 def storeToFile(interfaces, jsonFile):
@@ -108,6 +122,8 @@ def monitorNetworkUsage(selectedInterfaces):
 
 
 def startMonitor():
+    setupFiles(filesToSetup)
+
     availableInterfaces = getAvailableInterfaces()
     selectedInterfaces = filterDesiredInterfaces(availableInterfaces, desiredInterfaces)
     setupInterfaces(selectedInterfaces)
