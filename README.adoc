@@ -32,8 +32,14 @@ Currently monitoring data is saved to `./logs/networkUsage.json`
 See the link:./LICENSE.adoc[LICENSE] file for license rights and limitations (MIT).
 
 == TODO
-- [ ] Add option to pass parameters to script (interfaces to monitor, json file location)
+
+- [ ] Add option to pass parameters to script (interfaces to monitor, json file location,
+update rate)
+
 - [ ] Add option to display network usage only/also to terminal (not into `.json` file)
+
 - [ ] Add help message
+
 - [ ] Add code checking
-- [ ] Document code
+
+- [x] Document code
