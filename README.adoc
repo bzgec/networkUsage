@@ -9,7 +9,9 @@ Monitor current network usage.
 == Usage
 Run `networkUsageProc.py` and network usage monitoring is started.
 
-Data is stored in json format.
+Data is stored in json file (currently to `./logs/networkUsage.json` - relative
+to `networkUsageProc.py` location)
+
 [source,json]
 ----
 [
@@ -25,11 +27,24 @@ Interfaces monitored are all that match this parameters:
 - `enp*`
 - `eth?:`
 
-Currently monitoring data is saved to `./logs/networkUsage.json`
-(relative to `networkUsageProc.py` location)
+
+== Requirements
+* https://www.gnu.org/software/make/[GNU - make]
+* https://pypi.org/project/mccabe/[pip - mccabe]
+* https://pypi.org/project/flake8/[pip - flake8]
+
+For `pip` packages you can call `make setup` or `pip install -r requirements.txt`
+
+
+== Development
+Before each commit check source code with `make check` command.
+
+WARNING: If there are some errors fix them!
+
 
 == License
 See the link:./LICENSE.adoc[LICENSE] file for license rights and limitations (MIT).
+
 
 == TODO
 
@@ -40,6 +55,6 @@ update rate)
 
 - [ ] Add help message
 
-- [ ] Add code checking
-
 - [x] Document code
+
+- [x] Add code checking

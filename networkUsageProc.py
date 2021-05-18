@@ -72,7 +72,7 @@ def filterDesiredInterfaces(availableInterfaces, desiredInterfaces):
         for desiredInterface in desiredInterfaces:
             pattern = re.compile(desiredInterface)
             if pattern.match(availableInterface):
-                selectedInterfaces.append({ "name": availableInterface })
+                selectedInterfaces.append({"name": availableInterface})
 
     return selectedInterfaces
 
@@ -92,8 +92,8 @@ def setupInterfaces(interfaces):
 def printUsage(interface):
     print(sprintf("%s - Rx: %d kB, Tx: %d kB",
                   interface["name"],
-                  interface["bypsRx"]/1000,
-                  interface["bypsTx"]/1000))
+                  interface["bypsRx"] / 1000,
+                  interface["bypsTx"] / 1000))
 
 
 # Store interfaces to json file
@@ -116,7 +116,6 @@ def storeToFile(interfaces, jsonFile):
             "bypsTx": interface["bypsTx"],
         })
 
-
     jsonFileData.append({
         "name": totalUsage["name"],
         "bypsRx": totalUsage["bypsRx"],
@@ -137,15 +136,11 @@ def monitorNetworkUsage(selectedInterfaces):
             getBytes(interface)
             interface["bypsRx"] = interface["byRx_curr"] - interface["byRx_prev"]
             interface["bypsTx"] = interface["byTx_curr"] - interface["byTx_prev"]
-            # print(interface["name"] + "  RX: " + str(interface["bypsRx"]/1000) + " TX: " + str(interface["bypsTx"]/1000))
-            # print(interface["name"] + "  RX: " + str(interface["byRx"]) + " TX: " + str(interface["byTx"]))
-            # printUsage(interface)
             storeFreshBytes(interface)
 
         storeToFile(selectedInterfaces, networkUsageFile_dflt)
 
         sleep(1)
-
 
 
 # Start networkUsage script
@@ -166,4 +161,3 @@ def startMonitor():
 
 if __name__ == "__main__":
     startMonitor()
-
