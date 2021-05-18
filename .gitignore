@@ -1,4 +1,6 @@
 logs/
+.venv.dev
+.venv.prod
 
 
 # Byte-compiled / optimized / DLL files
