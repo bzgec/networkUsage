@@ -18,15 +18,17 @@ def setupFiles(files):
 
 
 class networkUsageClass:
-    def __init__(self, parameters):
+    def __init__(self, desiredInterfaces=config_dflt.desiredInterfaces,
+                 updateInterval=config_dflt.updateInterval,
+                 networkUsageFile=config_dflt.networkUsageFile):
         # Used to select which interfaces to monitor.
-        self.desiredInterfaces = parameters.desiredInterfaces
+        self.desiredInterfaces = desiredInterfaces
 
         # Update interval in seconds
-        self.updateInterval = parameters.updateInterval
+        self.updateInterval = updateInterval
 
         # Where to save current network usage json file
-        self.networkUsageFile = parameters.networkUsageFile
+        self.networkUsageFile = networkUsageFile
 
         # Array of files (full path) which are checked at setup
         # Needed in case some parent folder doesn't exists
@@ -157,7 +159,7 @@ class networkUsageClass:
 # - setup interfaces (prepare commands, make first measurement/monitoring...)
 # - monitor network usage
 def main():
-    networkUsage = networkUsageClass(config_dflt)
+    networkUsage = networkUsageClass()
     networkUsage.monitorNetworkUsage()
 
 
