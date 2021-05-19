@@ -48,7 +48,6 @@ class networkUsageClass:
         # Array which is going to hold:
         # - names of interfaces,
         # - commands to get current bytes (cmd_getRxBytes, cmd_getTxBytes),
-        # - current bytes used by interface (byRx_curr, byTx_curr),
         # - previously used bytes by interface (byRx_prev, byTx_prev),
         # - current network usage (bypsRx, bypsTx).
         self.selectedInterfaces = []
@@ -64,13 +63,14 @@ class networkUsageClass:
 
     # Get new bytes used by specified interface
     def getBytes(self, interface):
-        interface["byRx_curr"] = int(os.popen(interface["cmd_getRxBytes"]).read())
-        interface["byTx_curr"] = int(os.popen(interface["cmd_getTxBytes"]).read())
+        byRx = int(os.popen(interface["cmd_getRxBytes"]).read())
+        byTx = int(os.popen(interface["cmd_getTxBytes"]).read())
+        return byRx, byTx
 
     # Store new bytes used by specified interface
-    def storeFreshBytes(self, interface):
-        interface["byRx_prev"] = interface["byRx_curr"]
-        interface["byTx_prev"] = interface["byTx_curr"]
+    def storeFreshBytes(self, interface, byRx, byTx):
+        interface["byRx_prev"] = byRx
+        interface["byTx_prev"] = byTx
 
     # Get all available interface
     # Return available interfaces
@@ -96,8 +96,8 @@ class networkUsageClass:
             interface["cmd_getRxBytes"] = sprintf(self.cmd_getRxBytes, interface["name"])
             interface["cmd_getTxBytes"] = sprintf(self.cmd_getTxBytes, interface["name"])
 
-            self.getBytes(interface)
-            self.storeFreshBytes(interface)
+            byRx, byTx = self.getBytes(interface)
+            self.storeFreshBytes(interface, byRx, byTx)
 
     # Print network usage by specified interface in kB
     def printUsage(interface):
@@ -142,10 +142,10 @@ class networkUsageClass:
     def monitorNetworkUsage(self):
         while True:
             for interface in self.selectedInterfaces:
-                self.getBytes(interface)
-                interface["bypsRx"] = interface["byRx_curr"] - interface["byRx_prev"]
-                interface["bypsTx"] = interface["byTx_curr"] - interface["byTx_prev"]
-                self.storeFreshBytes(interface)
+                byRx, byTx = self.getBytes(interface)
+                interface["bypsRx"] = round((byRx - interface["byRx_prev"]) / self.updateInterval)
+                interface["bypsTx"] = round((byTx - interface["byTx_prev"]) / self.updateInterval)
+                self.storeFreshBytes(interface, byRx, byTx)
 
             self.storeToFile()
 
