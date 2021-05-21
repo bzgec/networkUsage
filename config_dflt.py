@@ -13,3 +13,6 @@ updateInterval = 1
 
 # Where to save current network usage json file
 networkUsageFile = os.path.dirname(os.path.abspath(__file__)) + "/logs/networkUsage.json"
+
+# Print network usage to the terminal also (not just to the json file)
+printUsageToTerminal = False

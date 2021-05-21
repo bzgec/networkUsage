@@ -1,6 +1,8 @@
 logs/
 .venv.dev
 .venv.prod
+*.json
+config.py
 
 
 # Byte-compiled / optimized / DLL files
