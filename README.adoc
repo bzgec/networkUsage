@@ -71,6 +71,9 @@ Before each commit check source code with `make check` command.
 
 WARNING: If there are some errors fix them before committing!
 
+Or you can just run `make commit` which will run all the necessary commands before running
+`git commit`. Note that you still need to add files to index (`git add`).
+
 === Dependencies
 * https://www.gnu.org/software/make/[GNU - make]
 * `pip` link:requirements.dev.txt[requirements.dev.txt]

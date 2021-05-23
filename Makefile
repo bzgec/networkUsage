@@ -26,3 +26,8 @@ $(VENV_DIR_DEV)/touchfile: $(REQUIREMENTS_DEV)
 	test -d $(VENV_DIR_DEV) || python -m venv $(VENV_DIR_DEV)
 	source $(VENV_DIR_DEV)/bin/activate && pip install -r $(REQUIREMENTS_DEV)
 	touch $(VENV_DIR_DEV)/touchfile
+
+
+.PHONY: commit
+commit: check
+	git commit
