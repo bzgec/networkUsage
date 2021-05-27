@@ -9,10 +9,10 @@ Monitor current network usage on Linux system.
 == Usage
 image::./Res/demo.gif[Demo]
 
-Run `networkUsageProc.py` and network usage monitoring is started.
+Run `networkUsage.py` and network usage monitoring is started.
 
 Data is stored in json file (defaults to `./logs/networkUsage.json` - relative
-to `networkUsageProc.py` location)
+to `networkUsage.py` location)
 
 [source,json]
 ----
@@ -33,7 +33,7 @@ Default monitored interfaces are all that match this parameters:
 
 [source]
 ----
-python networkUsageProc.py [OPTIONS]
+python networkUsage.py [OPTIONS]
 
 Options:
   -h, --help        show this help

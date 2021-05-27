@@ -9,7 +9,7 @@ from helper import bold_str, sprintf, cursorUpLines, setupFiles
 dfltCfgFile = "config_dflt.py"
 
 # Import default configuration file.
-# Not using `import config_dflt` because of printing option (`networkUsageProc.py -s`)
+# Not using `import config_dflt` because of printing option (`networkUsage.py -s`)
 # and we want to have only one instance of default config file name - `dfltCfgFile`
 config_dflt = import_module(dfltCfgFile.replace(".py", ""))
 
@@ -20,7 +20,7 @@ Script to monitor network usage.
 
 Tested with python 3.9.5.
 
-python networkUsageProc.py [OPTIONS]
+python networkUsage.py [OPTIONS]
 
 Options:
   -h, --help        show this help
