@@ -122,11 +122,11 @@ def importConfigModule(moduleName, networkUsageParam):
 
 def renderNetworkSpeed(byps):
     if byps >= 10 ** 9:
-        return sprintf("%0.2f GB", byps / (10 ** 9))
+        return sprintf("{:0.2f} GB", byps / (10 ** 9))
     elif byps >= 10 ** 6:
-        return sprintf("%0.2f MB", byps / (10 ** 6))
+        return sprintf("{:0.2f} MB", byps / (10 ** 6))
     else:
-        return sprintf("%0.2f kB", byps / (10 ** 3))
+        return sprintf("{:0.2f} kB", byps / (10 ** 3))
 
 
 class networkUsageClass:
@@ -154,10 +154,10 @@ class networkUsageClass:
         ]
 
         # Command which is used to get RX bytes for specific interface
-        self.cmd_getRxBytes = "cat /sys/class/net/%s/statistics/rx_bytes"
+        self.cmd_getRxBytes = "cat /proc/net/dev | grep {:s} | awk '{{printf(\"%s\\n\", $2)}}'"
 
         # Command which is used to get TX bytes for specific interface
-        self.cmd_getTxBytes = "cat /sys/class/net/%s/statistics/tx_bytes"
+        self.cmd_getTxBytes = "cat /proc/net/dev | grep {:s} | awk '{{printf(\"%s\\n\", $10)}}'"
 
         # Command which is used to get all available interfaces
         self.cmd_getAvailableInterfaces = "cat /proc/net/dev | grep : | awk '{printf(\"%s\\n\", $1)}' | sed 's/://g'"
@@ -243,12 +243,12 @@ class networkUsageClass:
     # Print network usage by specified interface in kB
     def printUsage(self):
         for interface in self.selectedInterfaces:
-            print(sprintf("%s - Rx: %s, Tx: %s",
+            print(sprintf("{:s} - Rx: {:s}, Tx: {:s}",
                           interface["name"],
                           renderNetworkSpeed(interface["bypsRx"]),
                           renderNetworkSpeed(interface["bypsTx"])))
 
-        print(sprintf("%s - Rx: %s, Tx: %s",
+        print(sprintf("{:s} - Rx: {:s}, Tx: {:s}",
                       "total",
                       renderNetworkSpeed(self.totalUsage["bypsRx"]),
                       renderNetworkSpeed(self.totalUsage["bypsTx"])))

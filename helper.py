@@ -28,8 +28,8 @@ def setupFiles(files):
 
 
 # C like sprintf function
-def sprintf(format, *args):
-    return (format % args)
+def sprintf(string, *args):
+    return (string.format(*args))
 
 
 def printf(format, *args):
