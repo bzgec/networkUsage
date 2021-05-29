@@ -12,7 +12,7 @@ check: venv_dev
 	@echo Checking code standards...
 	@( \
 		source $(VENV_DIR_DEV)/bin/activate; \
-		flake8 --ignore=E501 --max-complexity 10 --exclude $(VENV_DIR_DEV),.git,__pycache__ .; \
+		flake8 --ignore=E501 --max-complexity 10 --exclude $(VENV_DIR_DEV),.git,__pycache__ . || exit 1; \
 	)
 
 
