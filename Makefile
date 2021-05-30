@@ -2,8 +2,8 @@
 # https://stackoverflow.com/a/59335943/14246508
 # https://medium.com/stack-me-up/using-makefiles-the-right-way-a82091286950
 
-VENV_DIR_DEV?=.venv.dev
-REQUIREMENTS_DEV:=requirements.dev.txt
+VENV_DIR_DEV ?= .venv.dev
+REQUIREMENTS_DEV ?= requirements.dev.txt
 
 
 # Check code for best standards
